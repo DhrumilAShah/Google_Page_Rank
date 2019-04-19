@@ -20,17 +20,17 @@ public class pgrk1432 {
 	public static void main(String[] args) throws IOException {
 		try {
 
-			//			if (args.length < 3) {
-			//				System.out.println("Please enter valid number of arguments!");
-			//				return;
-			//			}
+			if (args.length < 3) {
+				System.out.println("Please enter valid number of arguments!");
+				return;
+			}
 
-			iterations = 15;//Integer.parseInt(args[0]);
-			initialValue = -1;//Integer.parseInt(args[1]);
-			fileName = "u.txt";//args[2];
+			iterations = Integer.parseInt(args[0]);
+			initialValue = Integer.parseInt(args[1]);
+			fileName = args[2];
 
 			if(fileName.trim().length()==0 || initialValue > 1 || initialValue<-2 ) {
-				System.out.println("Please enter authentic arguments!");
+				System.out.println("Please enter valid arguments!");
 				return;
 			}
 
@@ -134,7 +134,7 @@ public class pgrk1432 {
 
 			for(int h=0; h<vertices; h++) 
 				adjList.add(h,null);
-
+			int edgeCounter=0;
 			while((index = fr.getNextValue()) != -1) {
 				int outBound = fr.getNextValue();
 				if(outBound != -1) {
@@ -147,9 +147,10 @@ public class pgrk1432 {
 						ll.add(outBound);			
 						adjList.set(index,ll);
 					}
+					edgeCounter++;
 				} else break;
 			}
-
+			
 			if(initialValue == -1) {
 				initVal = 1/(double)vertices;
 			}else if(initialValue == -2) {
@@ -158,6 +159,10 @@ public class pgrk1432 {
 
 			for(int i=0; i<vertices; i++) {
 				pgRnk[i]=initVal;
+			}
+			
+			if(edgeCounter != edges) {
+				throw new Exception("Improper data format!");
 			}
 
 		}catch(Exception e) {
