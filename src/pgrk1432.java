@@ -58,7 +58,7 @@ public class pgrk1432 {
 			computePageRank();	
 
 			int i=1;
-			while((iterations == 0 ? true : i!=(iterations+1) )) {	
+			while(iterations <= 0 ? true : i!=(iterations+1) ) {	
 
 				if(vertices < 11) {
 					System.out.print("Iter : "+i+" :");
@@ -69,7 +69,9 @@ public class pgrk1432 {
 
 				computePageRank();
 
-				if(vertices>10 && didItConverge((iterations == 0) ? 0 : i)) break;
+				if((vertices>10 || iterations <0) && 
+						didItConverge((iterations <= 0) ? iterations : i)) break;
+				
 				i++;
 			}
 			if(vertices>10) {
@@ -84,9 +86,10 @@ public class pgrk1432 {
 	}
 
 	private static boolean didItConverge(int iter) {
-		double temp = (iter == 0) ? 100000 : Math.pow(10, (iter * -1));
-		for(int i=0; i<pgRnk.length; i++)
-			if((int)Math.floor(prevPgRnk[i] * temp) != (int)Math.floor(pgRnk[i] * temp)) return false;
+		double errRate = (iter == 0) ? 100000 : Math.pow(10, (iter * -1));
+		for(int i=0; i<pgRnk.length; i++) {
+			if((int)Math.floor(prevPgRnk[i] * errRate) != (int)Math.floor(pgRnk[i] * errRate)) return false;
+		}
 		return true;
 	}
 
@@ -150,7 +153,7 @@ public class pgrk1432 {
 					edgeCounter++;
 				} else break;
 			}
-			
+
 			if(initialValue == -1) {
 				initVal = 1/(double)vertices;
 			}else if(initialValue == -2) {
@@ -160,7 +163,7 @@ public class pgrk1432 {
 			for(int i=0; i<vertices; i++) {
 				pgRnk[i]=initVal;
 			}
-			
+
 			if(edgeCounter != edges) {
 				throw new Exception("Improper data format!");
 			}
