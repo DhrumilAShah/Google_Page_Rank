@@ -1,3 +1,4 @@
+// Dhrumil Shah cs610 1432 prp
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ public class pgrk1432 {
 	static int edges;
 	static int vertices;
 	static ArrayList<LinkedList<Integer>> adjList;
-	static FileReader1432 fr;
+	static Reader1432 fr;
 	static int initialValue;
 	static int iterations;
 	static String fileName;
@@ -34,7 +35,7 @@ public class pgrk1432 {
 				return;
 			}
 
-			fr = new FileReader1432(fileName);
+			fr = new Reader1432(fileName);
 
 			vertices = fr.getVerticeSize();
 			edges = fr.getEdgeSize();
